@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const articleRouter = require('./routes/articles');
-//const emailRouter = require('./routes/emails');
+const emailRouter = require('./routes/emails');
 const cors = require('cors');
 const mongoose =require('mongoose');
 const Article = require('./models/articles');
-//const Email = require('./models/emails');
+const Email = require('./models/emails');
 const methodOverride = require('method-override');
 
 
@@ -33,11 +33,21 @@ app.use(express.urlencoded({extended: false}));
 
 app.get('/', async (req,res)=>{
     const articles = await Article.find().sort({createdAt:'desc'});
-    //const emails = await Email.find();
+ 
+    
     res.render('articles/index', {articles:articles});
 });
+
+
+app.get('/home', async (req,res)=>{
+  //const emails = await Email.find();
+
+  res.render('home/home', {emails: new Email()});
+
+});
+
 app.use('/articles', articleRouter);
-//app.use(emailRouter);
+app.use('/emails', emailRouter);
 
 
 

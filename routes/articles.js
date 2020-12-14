@@ -1,7 +1,6 @@
 const express = require('express');
-const articles = require('./../models/articles');
+//const articles = require('./../models/articles');
 const router = express.Router()
-//const { resolveInclude } = require('ejs');
 const Article = require('./../models/articles');
 
 
