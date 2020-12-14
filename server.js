@@ -8,6 +8,7 @@ const Article = require('./models/articles');
 const Email = require('./models/emails');
 const methodOverride = require('method-override');
 
+console.log("this is working");
 
 require('dotenv').config();
 
