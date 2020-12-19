@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form-inline" id="myForm" action="/users/login" method="post">
+        <div class="form-group">
+            <label for="title">Login</label>
+            <input required type="email" name="email" value="<%= email %>" id="title" class="form-control" placeholder="Email">
+            <input required type="password" name="password" value="<%= password %>" id="title" class="form-control" placeholder="Password">
+            <input type="submit">
+        </div>
+      </form> 
+<!-- 
+    IT WORKS!! I learned that, in order for the posting to work I need to first have a reference for the collection
+    Then, I have to send it into the router
+    Then I have to reference the correct elements in the thing
+    I had problems because I confused method and action. 
+    -- First problem came from not referencing the database correctly
+    -- Second problem came from mistaing action and methods
+-->
+    <a href="/users/register">REGISTER</a>
+</body>
+</html>

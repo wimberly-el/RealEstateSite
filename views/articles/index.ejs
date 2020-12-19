@@ -15,7 +15,15 @@
 
     <div class="container">
         <h1 class="mb-4">Blog Articles</h1>
-        <a href="/articles/new" class="btn btn-success">New Article</a>
+        <% if(userId) { %>
+  <!--Works-->          <a href="/articles/new" class="btn btn-success">New Article</a>
+       <!--we'll see-->     <a href="/logout" class="btn btn-danger">Log Out</a>
+       <form method="post" action="/logout">
+            <button>Logout</button>
+        </form>
+        <% } else { %>
+      <!--Works-->      <a href="/users/login" class="btn btn-primary">Login</a>
+        <% } %>
     <% articles.forEach(article => { %>
         <div class="card mt-4">
             <div class="card-body">
@@ -23,10 +31,12 @@
            <div class="card-subtitle text-muted mb-2"><%= article.createdAt.toLocaleDateString() %></div>
             <div class="card-text mb-2"><%= article.description %></div>
             <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
+                <%  if(userId) {  %>
             <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
             <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
                 <button class="btn btn-danger ">Delete</button>
             </form>
+                <%   }  %>
         </div>
         </div>
     <% }) %>

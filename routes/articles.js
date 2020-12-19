@@ -2,12 +2,14 @@ const express = require('express');
 //const articles = require('./../models/articles');
 const router = express.Router()
 const Article = require('./../models/articles');
-
+const sessins = require('express-session');
 
 router.get('/new', (req,res)=>{
-    
+  //console.log(req.session);
     res.render('../views/articles/new', {article: new Article()});
 });
+
+
 
 router.get('/edit', (req,res)=>{
     res.render('../views/articles/edit');
@@ -20,8 +22,9 @@ router.post('/', async (req,res, next)=>{
 
 router.get('/:slug', async(req,res)=>{
    const article = await Article.findOne({slug: req.params.slug});
+   const { userId} = req.session;
    if (article == null) {res.redirect('/')}
-   res.render('articles/show', {article: article});
+   res.render('articles/show', {article: article, userId});
 })
 
 router.delete('/:id', async (req,res)=>{
@@ -31,6 +34,7 @@ router.delete('/:id', async (req,res)=>{
 
 router.put('/:id', async (req,res, next)=>{
     req.article = await Article.findById(req.params.id);
+
     next();
 }, saveArticleAndRedirect('edit'));
 
