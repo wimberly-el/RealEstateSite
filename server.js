@@ -11,6 +11,7 @@ const mongoose =require('mongoose');
 const Article = require('./models/articles');
 const Email = require('./models/emails');
 const User = require('./models/user');
+const Session = require('./models/sessions');
 //This is used for overriding basic functions to allow delete
 const methodOverride = require('method-override');
 //setting up for cookies
@@ -80,11 +81,31 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 
 app.get('/', async (req,res)=>{
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log(ip); // ip address of the user
+    //req.session.leAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    
     const articles = await Article.find().sort({createdAt:'desc'});
     const { userId} = req.session;
 
+   // let isIpFound = (theCookie) => {
+    //  return theCookie.leAddress === ip;
+    //}
+    //const mCookie = await Session.find((x) => x);
     
-    res.render('articles/index', {articles:articles, userId});
+    const { leAddress } = req.session;
+    let randy = [];
+    const sess = await  ( await Session.find().sort({expires: 'desc'})).forEach(y=> randy.push(JSON.parse(y.session)));
+    //let thrawn = sess.forEach(x=> JSON.parse(x.session) );
+    
+    console.log(Object.values(randy));
+    console.log(randy[0].userId);
+    //let solitions = 
+    //console.log(mCookie.keys(expires));
+
+    //console.log("The address is " + leAddress + " the other result is " + " " + mCookie);
+    //console.log( typeof mCookie);
+    res.render('articles/index', {articles:articles, userId, leAddress, randy});
 });
 
 
@@ -93,7 +114,7 @@ app.get('/', async (req,res)=>{
 app.get('/home', async (req,res)=>{
   //const emails = await Email.find();
   console.log(req.session);
-
+  
   res.render('home/home', {emails: new Email()});
 
 });

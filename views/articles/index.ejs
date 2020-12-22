@@ -11,11 +11,12 @@
 </head>
 <body>
 
+<%- leAddress %>
 
 
     <div class="container">
         <h1 class="mb-4">Blog Articles</h1>
-        <% if(userId) { %>
+        <% if(randy[0].userId) { %>
   <!--Works-->          <a href="/articles/new" class="btn btn-success">New Article</a>
        <!--we'll see-->     <a href="/logout" class="btn btn-danger">Log Out</a>
        <form method="post" action="/logout">

@@ -44,7 +44,7 @@ password:"asdf"
 
 const TWO_HOURS = 1000 * 60 * 60 * 2;
 
-const { 
+let { 
     PORT = 3000, 
     NODE_ENV = 'development', 
     SESS_NAME= 'sid',
@@ -80,7 +80,7 @@ const users = [
 ];
 
 router.route('/login').get(async (req,res)=>{
-    const { userId} = req.session;
+    const { userId, leAddress } = req.session;
     
     console.log(req.session);
     console.log(userId);
@@ -88,6 +88,11 @@ router.route('/login').get(async (req,res)=>{
     res.render('../views/home/login',  {email:User.email, password: User.password});
 }).post((req,res)=>{
     const {email, password} = req.body;
+console.log("the ip address is below me")
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log(ip); // ip address of the user
+    req.session.leAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    
         console.log("step 1")
     if (email && password) {
         const user = users.find(
@@ -100,7 +105,7 @@ router.route('/login').get(async (req,res)=>{
             //alert('bub');
             //console.log(req.session.email)
             console.log(user.password);
-            return res.redirect('/home');
+            return res.redirect('/');
 
         }
     } 
