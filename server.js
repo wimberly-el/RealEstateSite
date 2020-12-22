@@ -63,7 +63,7 @@ app.use(session({
      secure: IN_PROD
  },
   store: new MongoStore({
-    url: uri,
+    mongooseConnection: mongoose.connection,
     ttl: 60*60 //1 hour
   })
 }));
