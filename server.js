@@ -64,6 +64,7 @@ app.use(session({
  },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
+    stringify: true,
     ttl: 60*60 //1 hour
   })
 }));
