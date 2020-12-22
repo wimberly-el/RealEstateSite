@@ -4,6 +4,10 @@ const router = express.Router();
 const User = require('./../models/user');
 const { Cookie } = require('express-session');
 const session= require('express-session');
+//trying out cookies
+//const cookieParser = require('cookie-parser');
+
+//router.use(express.cookieParser());
 
 router.route('/register').get((req,res)=>{
     //when creating a new item, you only need the new function
@@ -92,8 +96,12 @@ router.route('/login').get(async (req,res)=>{
         console.log("step 2")
         if (user) {
             req.session.userId = user.id;
-            console.log("step 3")
+            console.log("step 3");
+            //alert('bub');
+            //console.log(req.session.email)
+            console.log(user.password);
             return res.redirect('/home');
+
         }
     } 
     res.redirect('/login');
