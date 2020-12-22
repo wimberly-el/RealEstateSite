@@ -21,8 +21,8 @@ const session = require('express-session');
 //can be repaired in the future
 const TWO_HOURS = 1000 * 60 * 60 * 2;
 
-//memory store docs recomend I do this
-const MemoryStore = require('memorystore')(session);
+//mongo connect docs recomend I do this
+const MongoStore = require('connect-mongo')(session);
 
 const { 
     PORT = 3000, 
@@ -62,9 +62,10 @@ app.use(session({
      sameSite: true,
      secure: IN_PROD
  },
- store: new MemoryStore({
-   checkPeriod: 86400000
- })
+  store: new MongoStore({
+    url: uri,
+    ttl: 60*60 //1 hour
+  })
 }));
 
 app.listen( process.env.PORT || 5000);
