@@ -11,22 +11,17 @@
 </head>
 <body>
 
-<%- leAddress %>
-<%- cookieName %>
-
-<% if(cookieName){ %>
-    <p>Lookie lookie I've got the cookie</p>
-
-<% } %>
 
     <div class="container">
         <h1 class="mb-4">Blog Articles</h1>
-        <% if(userId) { %>
+        <% if(cookieName) { %>
   <!--Works-->          <a href="/articles/new" class="btn btn-success">New Article</a>
-       <!--we'll see-->     <a href="/logout" class="btn btn-danger">Log Out</a>
-       <form method="post" action="/logout">
-            <button>Logout</button>
-        </form>
+       <!--we'll see-->    <!-- <a href="/logout" class="btn btn-danger">Log Out</a>-->
+     <form action="/" class="d-inline">
+      <!-- <a  class="btn btn-danger" onclick="deleteCookie()">Log Out</a>-->
+       <button href="/" class="btn btn-danger d-inline" onclick="deleteCookie()" >Logout</button>
+        </form>           
+        
         <% } else { %>
       <!--Works-->      <a href="/users/login" class="btn btn-primary">Login</a>
         <% } %>
@@ -37,13 +32,30 @@
            <div class="card-subtitle text-muted mb-2"><%= article.createdAt.toLocaleDateString() %></div>
             <div class="card-text mb-2"><%= article.description %></div>
             <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
-                <%  if(userId) {  %>
+                <%  if(cookieName) {  %>
             <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
             <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
-                <button class="btn btn-danger ">Delete</button>
+                <button class="btn btn-danger " >Delete</button>
             </form>
                 <%   }  %>
         </div>
+        <script>
+            console.log(document.cookie);
+            let deleteCookie = () => {
+                if(document.cookie == "name=2"){
+                    document.cookie = "name="+";"+"Thu, 01 Jan 1970"+";path=/";
+                    console.log(document.cookie)
+                }else if (document.cookie == "name=1"){
+                    console.log(document.cookie);
+                }else{
+                    console.log("ay yo ay")
+                }
+            }
+
+            let alertMe = () => {
+                alert("wowie zowie")
+            }
+        </script>
         </div>
     <% }) %>
 </div>

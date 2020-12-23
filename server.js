@@ -145,12 +145,16 @@ app.post('/home', async (req,res)=>{
 
 
 app.route('/logout').get().post((req,res)=>{
+  let cody = req.cookies.name;
+  console.log(cody)
   req.session.destroy(err => {
       if (err) {
           return res.redirect('/home');
       }
 
       res.clearCookie(SESS_NAME);
+      res.clearCookie(cody);
+      //console.log(cookiename)
       res.redirect('/');
   })
 });
