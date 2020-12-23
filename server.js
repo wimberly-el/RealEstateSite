@@ -22,6 +22,12 @@ const session = require('express-session');
 //can be repaired in the future
 const TWO_HOURS = 1000 * 60 * 60 * 2;
 
+//creating a regular cookie
+let cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+
+
 //mongo connect docs recomend I do this
 const MongoStore = require('connect-mongo')(session);
 
@@ -84,7 +90,8 @@ app.get('/', async (req,res)=>{
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     console.log(ip); // ip address of the user
     //req.session.leAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    
+    console.log("My name is ="+req.cookies.name)
+    const cookieName = await req.cookies.name;
     const articles = await Article.find().sort({createdAt:'desc'});
     const { userId} = req.session;
     const mySess = await Session.find();
@@ -107,7 +114,7 @@ app.get('/', async (req,res)=>{
 
     //console.log("The address is " + leAddress + " the other result is " + " " + mCookie);
     //console.log( typeof mCookie);
-    res.render('articles/index', {articles:articles, userId, leAddress, randy, ip});
+    res.render('articles/index', {articles:articles, userId, leAddress, randy, ip, cookieName});
 });
 
 
