@@ -1,9 +1,12 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 //const emails = require('../models/emails');
 const router = express.Router();
 const User = require('./../models/user');
 const { Cookie } = require('express-session');
 const session= require('express-session');
+
+router.use(cookieParser());
 //trying out cookies
 //const cookieParser = require('cookie-parser');
 
@@ -88,7 +91,7 @@ router.route('/login').get(async (req,res)=>{
     res.render('../views/home/login',  {email:User.email, password: User.password});
 }).post((req,res)=>{
     const {email, password} = req.body;
-console.log("the ip address is below me")
+//console.log("the ip address is below me")
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     console.log(ip); // ip address of the user
     req.session.leAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -98,12 +101,19 @@ console.log("the ip address is below me")
         const user = users.find(
             user => user.email === email && user.password === password
         )
+        res.cookie('name', user.id); //Sets name = express
+
         console.log("step 2")
         if (user) {
             req.session.userId = user.id;
             console.log("step 3");
             //alert('bub');
             //console.log(req.session.email)
+
+            //attemptiong the cookie approach
+            //from a route
+            //res.cookie('name', user.id).send('cookie set'); //Sets name = express
+
             console.log(user.password);
             return res.redirect('/');
 

@@ -14,3 +14,5 @@ I started making changes to the email and things aren't working
 you can return things to where they were by removing the email stuff and maybe makit it it's own page
 
 commented out a constant on emails.js in routes
+
+DEC 22 2020 -- the user can login and it'll change the view by IP and the userId

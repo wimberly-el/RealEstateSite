@@ -87,6 +87,7 @@ app.get('/', async (req,res)=>{
     
     const articles = await Article.find().sort({createdAt:'desc'});
     const { userId} = req.session;
+    const mySess = await Session.find();
 
    // let isIpFound = (theCookie) => {
     //  return theCookie.leAddress === ip;
@@ -97,15 +98,16 @@ app.get('/', async (req,res)=>{
     let randy = [];
     const sess = await  ( await Session.find().sort({expires: 'desc'})).forEach(y=> randy.push(JSON.parse(y.session)));
     //let thrawn = sess.forEach(x=> JSON.parse(x.session) );
-    
-    console.log(Object.values(randy));
-    console.log(randy[0].userId);
+    //console.log(JSON.parse(mySess[0].session));
+    randy.forEach(x=> (x.userId == 2&& x.leAddress == '::1'?console.log(x.userId + "  " + x.leAddress):console.log("wow")));
+    // //console.log(Object.values(randy));
+    // //console.log(randy[0].userId);
     //let solitions = 
     //console.log(mCookie.keys(expires));
 
     //console.log("The address is " + leAddress + " the other result is " + " " + mCookie);
     //console.log( typeof mCookie);
-    res.render('articles/index', {articles:articles, userId, leAddress, randy});
+    res.render('articles/index', {articles:articles, userId, leAddress, randy, ip});
 });
 
 
@@ -134,6 +136,7 @@ app.post('/home', async (req,res)=>{
 
 });
 
+
 app.route('/logout').get().post((req,res)=>{
   req.session.destroy(err => {
       if (err) {
@@ -144,6 +147,16 @@ app.route('/logout').get().post((req,res)=>{
       res.redirect('/');
   })
 });
+/*
+app.route('/logout').delete((req,res)=>{
+    let randy = [];
+    const sess = await  ( await Session.find().sort({expires: 'desc'})).forEach(y=> randy.push(JSON.parse(y.session)));
+    
+    await Session.find() .findByIdAndDelete(req.params.id);
+    
+    
+    res.redirect('/');
+});*/
 
 app.get('/users', async (req,res)=>{
  res.render('home/login', {usersHere: new User()});
