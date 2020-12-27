@@ -1,15 +1,22 @@
 const express = require('express');
-//const articles = require('./../models/articles');
 const router = express.Router()
-const Article = require('./../models/articles');
-const sessins = require('express-session');
+let cookieParser = require('cookie-parser');
+router.use(cookieParser());
+const Article = require('../models/articles');
+
+
+const articleRouter = require('../routes/articles');
+const { route } = require('./emails');
 
 router.get('/new', (req,res)=>{
-  //console.log(req.session);
     res.render('../views/articles/new', {article: new Article()});
 });
 
-
+router.route('/').get(async(req,res)=>{
+    const cookieName = await req.cookies.name;
+    const articles = await Article.find().sort({createdAt:'desc'});
+    res.render('main/blog', {articles:articles, cookieName});
+});
 
 router.get('/edit', (req,res)=>{
     res.render('../views/articles/edit');
@@ -29,7 +36,7 @@ router.get('/:slug', async(req,res)=>{
 
 router.delete('/:id', async (req,res)=>{
     await Article.findByIdAndDelete(req.params.id);
-    res.redirect('/');
+    res.redirect('/blog');
 })
 
 router.put('/:id', async (req,res, next)=>{
@@ -51,7 +58,7 @@ function saveArticleAndRedirect(path) {
       article.markdown = req.body.markdown
       try {
         article = await article.save()
-        res.redirect(`/articles/${article.slug}`)
+        res.redirect(`/blog/${article.slug}`)
       } catch (e) {
         res.render(`articles/${path}`, { article: article })
       }

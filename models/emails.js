@@ -6,9 +6,16 @@ const emailSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    name:{
+        type: String,
+        required: true
+    },
+    comments: {
+        type:String
+    },
     createdAt:{
         type: Date,
-        default: Date.now(),
+        default: Date.now()
     }
 });
 

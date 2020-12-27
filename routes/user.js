@@ -1,16 +1,11 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-//const emails = require('../models/emails');
 const router = express.Router();
 const User = require('./../models/user');
 const { Cookie } = require('express-session');
 const session= require('express-session');
 
 router.use(cookieParser());
-//trying out cookies
-//const cookieParser = require('cookie-parser');
-
-//router.use(express.cookieParser());
 
 router.route('/register').get((req,res)=>{
     //when creating a new item, you only need the new function
@@ -35,14 +30,6 @@ router.route('/register').get((req,res)=>{
       }
 });
 
-
-/*
-
-username:"amaze"
-email:"dude@gmail.com"
-password:"asdf"
-
-*/
 
 
 const TWO_HOURS = 1000 * 60 * 60 * 2;
@@ -85,42 +72,27 @@ const users = [
 router.route('/login').get(async (req,res)=>{
     const { userId, leAddress } = req.session;
     
-    console.log(req.session);
-    console.log(userId);
     
-    res.render('../views/home/login',  {email:User.email, password: User.password});
+    res.render('./main/login',  {email:User.email, password: User.password});
 }).post((req,res)=>{
     const {email, password} = req.body;
-//console.log("the ip address is below me")
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    console.log(ip); // ip address of the user
+
     req.session.leAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     
-        console.log("step 1")
     if (email && password) {
         const user = users.find(
             user => user.email === email && user.password === password
         )
         res.cookie('name', user.id); //Sets name = express
 
-        console.log("step 2")
         if (user) {
             req.session.userId = user.id;
-            console.log("step 3");
-            //alert('bub');
-            //console.log(req.session.email)
-
-            //attemptiong the cookie approach
-            //from a route
-            //res.cookie('name', user.id).send('cookie set'); //Sets name = express
-
-            console.log(user.password);
-            return res.redirect('/');
+  
+           return res.redirect('/blog');
 
         }
     } 
     res.redirect('/login');
-    //res.send("It is indeed working on the post of login");
 });
 
 module.exports = router;

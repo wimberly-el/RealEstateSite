@@ -16,3 +16,8 @@ you can return things to where they were by removing the email stuff and maybe m
 commented out a constant on emails.js in routes
 
 DEC 22 2020 -- the user can login and it'll change the view by IP and the userId
+
+dexc 26 
+-- the look needs to be cleaned up
+-- the logo is a struggle
+-- I just want this damn project out of my sight
