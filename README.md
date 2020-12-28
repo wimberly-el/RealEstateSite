@@ -20,4 +20,12 @@ DEC 22 2020 -- the user can login and it'll change the view by IP and the userId
 dexc 26 
 -- the look needs to be cleaned up
 -- the logo is a struggle
--- I just want this damn project out of my sight
+
+
+DEC 28
+-- create instruction manual for making any and all changes
+-- add the word florest to the page -- right under the logo
+-- find a purple castle logo in the meantime
+--fill in the front page
+-- migrate his studf onto his own accounts
+-- prepare to give everything off to him

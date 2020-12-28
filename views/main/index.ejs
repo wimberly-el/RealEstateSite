@@ -40,6 +40,14 @@
         .navbar {
             background-color: rgb(121, 121, 121) !important;
         }
+
+        #postLogo{
+	
+	text-shadow: -1px 1px 0 #000,
+				  1px 1px 0 #000,
+				 1px -1px 0 #000,   
+				-1px -1px 0 #000;
+}
     </style>
 </head>
 
@@ -79,11 +87,12 @@
 
 
     <!-- Header -->
-    <div class="jumbotron text-center vh-100">
-        <div class="row align-items-center vh-100 justify-content-end">
+    <div class="jumbotron text-center vh-100 rounded-0">
+        <div class=" align-items-center vh-100 justify-content-end">
 
             <img src="views\main\media\logo_without_inc.png" alt=""
                 style="height: 50%; background-color: rgba(109, 110, 112, 0.8);" class="">
+                <h1 id="postLogo" style="color: lightblue; font-size: 400%; ">Florist</h1>
         </div>
     </div>
 
@@ -93,9 +102,8 @@
         <h2>Who we are</h2>
         <h4>House of El is focused on the customer</h4>
         <p>Here at house of el, we prioritize the customer above everything else.</p>
-        <p>Without the particularly citizens of Baltimore searchign for a home in these difficult times.</p>
-        <p>After Covid-19, Houe of El has provided 26,000 Baltimoreans with homes across the city and into the county
-            areas.</p>
+        <p>We're working with citizens of Maryland searching for a home in these difficult times.</p>
+       
             </div>
 
     </div>
@@ -114,9 +122,8 @@
         <div class="row" style="width: 80%; margin-left: auto; margin-right: auto;">
             <div class="col-sm-8">
                 <h2>Contact Me</h2>
-                <h4>Lorem ipsum..</h4>
-                <p>Lorem ipsum..</p>
-                <button class="btn btn-default btn-lg" href="/">Get in Touch</button>
+  <h4>Get in touch with me by calling or texting me, or leave a note and I'll get right back to you!</h4>
+                <a class="btn btn-default btn-lg" style="background-color: #f6f6f6;" href="/contact">Get in Touch</a>
             </div>
             <div class="col-sm-4">
                 <!--<span class="glyphicon glyphicon-phone logo"></span>-->
@@ -134,9 +141,9 @@
                 <i class="fas fa-envelope logo"></i>
             </div>
             <div class="col-sm-6  ">
-                <h2>Subscribe to my newsletter</h2>
-                <h4><strong>MISSION:</strong> Our mission lorem ipsum..</h4>
-                <p><strong>VISION:</strong> Our vision Lorem ipsum..</p>
+                <h2>Subscribe!</h2>
+                <h4>Subscribe to the newsletter to be updated on new properties available.</h4>
+               <a class="btn btn-info btn-lg" style="background-color: #134faa !important ;" href="contact/subscribe">Subscribe today!</a>
             </div>
 
 
