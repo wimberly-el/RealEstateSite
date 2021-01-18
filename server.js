@@ -139,10 +139,10 @@ app.route('/logout').get().post((req, res) => {
 
     res.clearCookie(SESS_NAME);
     res.clearCookie(cody);
-    if(req.cookies.name == 2){
+    if(req.cookies.name == 1){
       
       res.clearCookie(SESS_NAME);
-      res.clearCookie(2);
+      res.clearCookie(1);
     }
     res.redirect('/blog');
   })
