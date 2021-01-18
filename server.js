@@ -139,6 +139,11 @@ app.route('/logout').get().post((req, res) => {
 
     res.clearCookie(SESS_NAME);
     res.clearCookie(cody);
+    if(req.cookies.name == 2){
+      
+      res.clearCookie(SESS_NAME);
+      res.clearCookie(2);
+    }
     res.redirect('/blog');
   })
 });
