@@ -26,6 +26,6 @@ DEC 28
 -- create instruction manual for making any and all changes
 -- add the word florest to the page -- right under the logo
 -- find a purple castle logo in the meantime
---fill in the front page
+-- fill in the front page
 -- migrate his stuff onto his own accounts
 -- prepare to give everything off to him
