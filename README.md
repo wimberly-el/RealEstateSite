@@ -6,7 +6,7 @@ The next step is
 Or sends a notification that it didn't work. 
 2. Adding a way to login to make changes to the website. This includes hiding things
 3. Reintroduce the home page
-4. Use the blogger site: https://www.w3schools.com/bootstrap/bootstrap_theme_company.asp
+
 
 
 I started making changes to the email and things aren't working
@@ -17,15 +17,15 @@ commented out a constant on emails.js in routes
 
 DEC 22 2020 -- the user can login and it'll change the view by IP and the userId
 
-dexc 26 
+dec 26 
 -- the look needs to be cleaned up
--- the logo is a struggle
+
 
 
 DEC 28
--- create instruction manual for making any and all changes
--- add the word florest to the page -- right under the logo
--- find a purple castle logo in the meantime
---fill in the front page
--- migrate his studf onto his own accounts
--- prepare to give everything off to him
+- create instruction manual for making any and all changes
+- add the word florest to the page -- right under the logo
+- find a purple castle logo in the meantime
+- fill in the front page
+- migrate his stuff onto his own accounts
+- prepare to give everything off to him
